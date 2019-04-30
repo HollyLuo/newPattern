@@ -1,0 +1,1664 @@
+{
+    "uniqueId" : "1",
+    "behaviorID" : "1",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552879410515",
+    "description" : "double_click",
+    "action" : [ 
+        "1", 
+        "2"
+    ],
+    "title" : "engageTicket",
+    "value" : "",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387294",
+            "Status" : "Unassigned",
+            "Sub Status" : "New"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "null",
+            "Systems Requiring Setup" : "null"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+{
+    "uniqueId" : "2",
+    "behaviorID" : "2",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552879410515",
+    "description" : "click dropdown list",
+    "action" : [ 
+        "3"
+    ],
+    "title" : "engageTicket",
+    "value" : "Assign",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387294",
+            "Status" : "Unassigned",
+            "Sub Status" : "New"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "1",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "3",
+    "behaviorID" : "3",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552879410515",
+    "description" : "select dropdown list",
+    "action" : [ 
+        "4"
+    ],
+    "title" : "engageTicket.Assign",
+    "value" : "Assign To Me",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387294",
+            "Status" : "Unassigned",
+            "Sub Status" : "New"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "1",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "4",
+    "behaviorID" : "4",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552879410515",
+    "description" : "click dropdown list",
+    "action" : [ 
+        "5"
+    ],
+    "title" : "engageTicket.Actions.ActionType",
+    "value" : "",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387294",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "1",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+{
+    "uniqueId" : "5",
+    "behaviorID" : "5",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552879410515",
+    "description" : "select dropdown list",
+    "action" : [ 
+        "6"
+    ],
+    "title" : "engageTicket.Actions.ActionType",
+    "value" : "Complete",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387294",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "1",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "6",
+    "behaviorID" : "6",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552879410515",
+    "description" : "type",
+    "action" : [ 
+        "7", 
+        "8"
+    ],
+    "title" : "engageTicket.completeTicket.#ofProcessedSecurities",
+    "value" : "1",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387294",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "1",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "Complete"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "7",
+    "behaviorID" : "7",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552879410515",
+    "description" : "left click",
+    "action" : [ 
+        "9"
+    ],
+    "title" : "engageTicket",
+    "value" : "Save and Close",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387294",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "1",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "Complete"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "1"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "8",
+    "behaviorID" : "1",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881404435",
+    "description" : "double_click",
+    "action" : [ 
+        "10", 
+        "11"
+    ],
+    "title" : "engageTicket",
+    "value" : "",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387295",
+            "Status" : "Unassigned",
+            "Sub Status" : "New"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "null",
+            "Systems Requiring Setup" : "null"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "9",
+    "behaviorID" : "2",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881404435",
+    "description" : "click dropdown list",
+    "action" : [ 
+        "12"
+    ],
+    "title" : "engageTicket",
+    "value" : "Assign",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387295",
+            "Status" : "Unassigned",
+            "Sub Status" : "New"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "2",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "10",
+    "behaviorID" : "3",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881404435",
+    "description" : "select dropdown list",
+    "action" : [ 
+        "13"
+    ],
+    "title" : "engageTicket.Assign",
+    "value" : "Assign To Me",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387295",
+            "Status" : "Unassigned",
+            "Sub Status" : "New"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "2",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "11",
+    "behaviorID" : "4",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881404435",
+    "description" : "click dropdown list",
+    "action" : [ 
+        "14"
+    ],
+    "title" : "engageTicket.Actions.ActionType",
+    "value" : "",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387295",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "2",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "12",
+    "behaviorID" : "5",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881404435",
+    "description" : "select dropdown list",
+    "action" : [ 
+        "15"
+    ],
+    "title" : "engageTicket.Actions.ActionType",
+    "value" : "Complete",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387295",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "2",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "13",
+    "behaviorID" : "6",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881404435",
+    "description" : "type",
+    "action" : [ 
+        "16", 
+        "17"
+    ],
+    "title" : "engageTicket.completeTicket.#ofProcessedSecurities",
+    "value" : "2",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387295",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "2",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "Complete"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "14",
+    "behaviorID" : "7",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881404435",
+    "description" : "left click",
+    "action" : [ 
+        "18"
+    ],
+    "title" : "engageTicket",
+    "value" : "Save and Close",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387295",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "2",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "Complete"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "2"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "15",
+    "behaviorID" : "1",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881495252",
+    "description" : "double_click",
+    "action" : [ 
+        "19", 
+        "20"
+    ],
+    "title" : "engageTicket",
+    "value" : "",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387296",
+            "Status" : "Unassigned",
+            "Sub Status" : "New"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "null",
+            "Systems Requiring Setup" : "null"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "16",
+    "behaviorID" : "2",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881495252",
+    "description" : "click dropdown list",
+    "action" : [ 
+        "21"
+    ],
+    "title" : "engageTicket",
+    "value" : "Assign",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387296",
+            "Status" : "Unassigned",
+            "Sub Status" : "New"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "3",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "17",
+    "behaviorID" : "3",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881495252",
+    "description" : "select dropdown list",
+    "action" : [ 
+        "22"
+    ],
+    "title" : "engageTicket.Assign",
+    "value" : "Assign To Me",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387296",
+            "Status" : "Unassigned",
+            "Sub Status" : "New"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "3",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "18",
+    "behaviorID" : "4",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881495252",
+    "description" : "click dropdown list",
+    "action" : [ 
+        "23"
+    ],
+    "title" : "engageTicket.Actions.ActionType",
+    "value" : "",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387296",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "3",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "19",
+    "behaviorID" : "5",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881495252",
+    "description" : "select dropdown list",
+    "action" : [ 
+        "24"
+    ],
+    "title" : "engageTicket.Actions.ActionType",
+    "value" : "Complete",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387296",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "3",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "20",
+    "behaviorID" : "6",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881495252",
+    "description" : "type",
+    "action" : [ 
+        "25", 
+        "26"
+    ],
+    "title" : "engageTicket.completeTicket.#ofProcessedSecurities",
+    "value" : "3",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387296",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "3",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "Complete"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "21",
+    "behaviorID" : "7",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881495252",
+    "description" : "left click",
+    "action" : [ 
+        "27"
+    ],
+    "title" : "engageTicket",
+    "value" : "Save and Close",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387296",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "3",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "Complete"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "3"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "22",
+    "behaviorID" : "1",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881613885",
+    "description" : "double_click",
+    "action" : [ 
+        "28", 
+        "29"
+    ],
+    "title" : "engageTicket",
+    "value" : "",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387297",
+            "Status" : "Unassigned",
+            "Sub Status" : "New"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "null",
+            "Systems Requiring Setup" : "null"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "23",
+    "behaviorID" : "2",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881613885",
+    "description" : "click dropdown list",
+    "action" : [ 
+        "30"
+    ],
+    "title" : "engageTicket",
+    "value" : "Assign",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387297",
+            "Status" : "Unassigned",
+            "Sub Status" : "New"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "2",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "24",
+    "behaviorID" : "3",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881613885",
+    "description" : "select dropdown list",
+    "action" : [ 
+        "31"
+    ],
+    "title" : "engageTicket.Assign",
+    "value" : "Assign To Me",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387297",
+            "Status" : "Unassigned",
+            "Sub Status" : "New"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "2",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "25",
+    "behaviorID" : "4",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881613885",
+    "description" : "click dropdown list",
+    "action" : [ 
+        "32"
+    ],
+    "title" : "engageTicket.Actions.ActionType",
+    "value" : "",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387297",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "2",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "26",
+    "behaviorID" : "5",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881613885",
+    "description" : "select dropdown list",
+    "action" : [ 
+        "33"
+    ],
+    "title" : "engageTicket.Actions.ActionType",
+    "value" : "Complete",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387297",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "2",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "27",
+    "behaviorID" : "6",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881613885",
+    "description" : "type",
+    "action" : [ 
+        "34", 
+        "35"
+    ],
+    "title" : "engageTicket.completeTicket.#ofProcessedSecurities",
+    "value" : "2",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387297",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "2",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "Complete"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "28",
+    "behaviorID" : "7",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881613885",
+    "description" : "left click",
+    "action" : [ 
+        "36"
+    ],
+    "title" : "engageTicket",
+    "value" : "Save and Close",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387297",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "4",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "Complete"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "2"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+
+{
+    "uniqueId" : "29",
+    "behaviorID" : "1",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881735869",
+    "description" : "double_click",
+    "action" : [ 
+        "37", 
+        "38"
+    ],
+    "title" : "engageTicket",
+    "value" : "",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387298",
+            "Status" : "Unassigned",
+            "Sub Status" : "New"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "null",
+            "Systems Requiring Setup" : "null"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+
+{
+    "uniqueId" : "30",
+    "behaviorID" : "2",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881735869",
+    "description" : "click dropdown list",
+    "action" : [ 
+        "39"
+    ],
+    "title" : "engageTicket",
+    "value" : "Assign",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387298",
+            "Status" : "Unassigned",
+            "Sub Status" : "New"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "5",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+
+{
+    "uniqueId" : "31",
+    "behaviorID" : "3",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881735869",
+    "description" : "select dropdown list",
+    "action" : [ 
+        "40"
+    ],
+    "title" : "engageTicket.Assign",
+    "value" : "Assign To Me",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387298",
+            "Status" : "Unassigned",
+            "Sub Status" : "New"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "5",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+
+{
+
+    "uniqueId" : "32",
+    "behaviorID" : "4",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881735869",
+    "description" : "click dropdown list",
+    "action" : [ 
+        "41"
+    ],
+    "title" : "engageTicket.Actions.ActionType",
+    "value" : "",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387298",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "5",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "33",
+    "behaviorID" : "5",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881735869",
+    "description" : "select dropdown list",
+    "action" : [ 
+        "42"
+    ],
+    "title" : "engageTicket.Actions.ActionType",
+    "value" : "Complete",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387298",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "5",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "34",
+    "behaviorID" : "6",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881735869",
+    "description" : "type",
+    "action" : [ 
+        "43", 
+        "44"
+    ],
+    "title" : "engageTicket.completeTicket.#ofProcessedSecurities",
+    "value" : "5",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387298",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "5",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "Complete"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "35",
+    "behaviorID" : "8",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881735869",
+    "description" : "left click",
+    "action" : [ 
+        "45"
+    ],
+    "title" : "engageTicket",
+    "value" : "",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387298",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "5",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "Complete"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "36",
+    "behaviorID" : "7",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552881735869",
+    "description" : "left click",
+    "action" : [ 
+        "46"
+    ],
+    "title" : "engageTicket",
+    "value" : "Save and Close",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181231S0387298",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Complete",
+            "# of Securities" : "5",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "Complete"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "5"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "37",
+    "behaviorID" : "1",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552991735869",
+    "description" : "double_click",
+    "action" : [ 
+        "47", 
+        "48"
+    ],
+    "title" : "engageTicket",
+    "value" : "",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181228S0386926",
+            "Status" : "Unassigned",
+            "Sub Status" : "New"
+        },
+        "Required Fields" : {
+            "Subject" : "Close",
+            "# of Securities" : "null",
+            "Systems Requiring Setup" : "null"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "38",
+    "behaviorID" : "2",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552991735869",
+    "description" : "click dropdown list",
+    "action" : [ 
+        "49"
+    ],
+    "title" : "engageTicket",
+    "value" : "Assign",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181228S0386926",
+            "Status" : "Unassigned",
+            "Sub Status" : "New"
+        },
+        "Required Fields" : {
+            "Subject" : "Close",
+            "# of Securities" : "1",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "39",
+    "behaviorID" : "3",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552991735869",
+    "description" : "select dropdown list",
+    "action" : [ 
+        "50"
+    ],
+    "title" : "engageTicket.Assign",
+    "value" : "Assign To Me",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181228S0386926",
+            "Status" : "Unassigned",
+            "Sub Status" : "New"
+        },
+        "Required Fields" : {
+            "Subject" : "Close",
+            "# of Securities" : "1",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "40",
+    "behaviorID" : "4",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552991735869",
+    "description" : "click dropdown list",
+    "action" : [ 
+        "51"
+    ],
+    "title" : "engageTicket.Actions.ActionType",
+    "value" : "",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181228S0386926",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Close",
+            "# of Securities" : "1",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "41",
+    "behaviorID" : "5",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552991735869",
+    "description" : "select dropdown list",
+    "action" : [ 
+        "52"
+    ],
+    "title" : "engageTicket.Actions.ActionType",
+    "value" : "Close",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181228S0386926",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Close",
+            "# of Securities" : "1",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "42",
+    "behaviorID" : "9",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552991735869",
+    "description" : "click audio",
+    "action" : [ 
+        "53"
+    ],
+    "title" : "engageTicket.closeTicket.closeType",
+    "value" : "Cancelled",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181228S0386826",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Close",
+            "# of Securities" : "1",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "Close"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "43",
+    "behaviorID" : "7",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552991735869",
+    "description" : "left click",
+    "action" : [ 
+        "54"
+    ],
+    "title" : "engageTicket",
+    "value" : "Save and Close",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181228S0386826",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Close",
+            "# of Securities" : "1",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "Close"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "Cancelled"
+        }
+    }
+}
+
+{
+    "uniqueId" : "44",
+    "behaviorID" : "1",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552992735869",
+    "description" : "double_click",
+    "action" : [ 
+        "55", 
+        "56"
+    ],
+    "title" : "engageTicket",
+    "value" : "",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181228S0386927",
+            "Status" : "Unassigned",
+            "Sub Status" : "New"
+        },
+        "Required Fields" : {
+            "Subject" : "Close",
+            "# of Securities" : "null",
+            "Systems Requiring Setup" : "null"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "45",
+    "behaviorID" : "2",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552992735869",
+    "description" : "click dropdown list",
+    "action" : [ 
+        "57"
+    ],
+    "title" : "engageTicket",
+    "value" : "Assign",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181228S0386927",
+            "Status" : "Unassigned",
+            "Sub Status" : "New"
+        },
+        "Required Fields" : {
+            "Subject" : "Close",
+            "# of Securities" : "1",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "46",
+    "behaviorID" : "3",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552992735869",
+    "description" : "select dropdown list",
+    "action" : [ 
+        "58"
+    ],
+    "title" : "engageTicket.Assign",
+    "value" : "Assign To Me",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181228S0386927",
+            "Status" : "Unassigned",
+            "Sub Status" : "New"
+        },
+        "Required Fields" : {
+            "Subject" : "Close",
+            "# of Securities" : "1",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "47",
+    "behaviorID" : "4",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552992735869",
+    "description" : "click dropdown list",
+    "action" : [ 
+        "59"
+    ],
+    "title" : "engageTicket.Actions.ActionType",
+    "value" : "",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181228S0386927",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Close",
+            "# of Securities" : "1",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "48",
+    "behaviorID" : "5",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552992735869",
+    "description" : "select dropdown list",
+    "action" : [ 
+        "60"
+    ],
+    "title" : "engageTicket.Actions.ActionType",
+    "value" : "Close",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181228S0386927",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Close",
+            "# of Securities" : "1",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "null"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "49",
+    "behaviorID" : "9",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552992735869",
+    "description" : "click audio",
+    "action" : [ 
+        "61"
+    ],
+    "title" : "engageTicket.closeTicket.closeType",
+    "value" : "Cancelled",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181228S0386927",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Close",
+            "# of Securities" : "1",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "Close"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "null"
+        }
+    }
+}
+
+{
+    "uniqueId" : "50",
+    "behaviorID" : "7",
+    "videoId" : "H04TAFI02PS0109_10.108.129.41_cg81319_1552992735869",
+    "description" : "left click",
+    "action" : [ 
+        "62"
+    ],
+    "title" : "engageTicket",
+    "value" : "Save and Close",
+    "concepts" : {
+        "Main Info" : {
+            "XMC Engage ID" : "XE181228S0386927",
+            "Status" : "Assigned",
+            "Sub Status" : "Pending"
+        },
+        "Required Fields" : {
+            "Subject" : "Close",
+            "# of Securities" : "1",
+            "Systems Requiring Setup" : "SMC"
+        },
+        "Actions" : {
+            "Action Type" : "Close"
+        },
+        "Complete Ticket" : {
+            "# of Processed Securities" : "null"
+        },
+        "Close Ticket" : {
+            "CloseType" : "Cancelled"
+        }
+    }
+}
