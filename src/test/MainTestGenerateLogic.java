@@ -32,9 +32,24 @@ public class MainTestGenerateLogic {
 
 	public static void main(String[] args) throws Exception {
 		List<PatternBehaviors> patternBehaviorsList = new ArrayList<>();
-		patternBehaviorsList = GetPatterns.getPatternsFromMongoDB("localhost", "IRA_test", "1");
+		patternBehaviorsList = GetPatterns.getAllPatterns("localhost", "IRA_multiVideo");
+		float support = 2;
+		
+		List<PatternBehaviors> frequencyPatternBehaviorsList = new ArrayList<>();
+		int size = 0;
+		for(PatternBehaviors new_pattern : patternBehaviorsList){
+			size += new_pattern.getUniqueIdsList().size();
+		}
+		System.out.println("size: " + size);
+	    System.out.println("--------------Frequecy Pattern -----------------");
+        for(PatternBehaviors new_pattern : patternBehaviorsList){
+    	    if(new_pattern.isFrequencyPattern(size, support)){
+    	    	frequencyPatternBehaviorsList.add(new_pattern);
+    	    }
+      }    
+		
 		// System.out.println("dsssss");
-		judgeLogic(0, patternBehaviorsList);
+		judgeLogic(0, frequencyPatternBehaviorsList);
 		// int length = 0;
 		// for (PatternBehaviors item : patternBehaviorsList) {
 		// item.printPatternBehaviors();
@@ -96,9 +111,10 @@ public class MainTestGenerateLogic {
 //			System.out.println("dddd");
 			length = item.getPatternBehaviors().size() > length ? item.getPatternBehaviors().size() : length;
 		}
-		for (int i = firstIndex; i < firstIndex+2; i++) {
+		for (int i = firstIndex; i < length; i++) {
 			boolean hasBehaviorLogic = false;
 			// boolean hasValueLogic = false;
+			//判断前面没有Logic分支。
 			List<String> behaviors = new ArrayList<>();
 			List<String> uniqueIds = new ArrayList<>();
 
@@ -111,11 +127,11 @@ public class MainTestGenerateLogic {
 						newPatternBehaviorsList = new ArrayList<>();
 						newPatternBehaviorsList.add(pattern);
 						map.put(behaviorId, newPatternBehaviorsList);
-//						System.out.println("111 : " + behaviorId);
+						System.out.println("111 : " + behaviorId);
 					} else {
 						newPatternBehaviorsList.add(pattern);
 						map.put(behaviorId, newPatternBehaviorsList);
-//						System.out.println("222 : " + behaviorId);
+						System.out.println("222 : " + behaviorId);
 					}
 
 					// behaviors.add(behaviorId);
@@ -126,7 +142,7 @@ public class MainTestGenerateLogic {
 				// System.out.println("index: " + i +", " + behaviors.toString()
 				// + ", " + uniqueIdsLists.toString());
 			}
-//			System.out.println("map.keySet: " + map.keySet());
+			System.out.println("map.keySet: " + map.keySet());
 			if (map.keySet().size() > 1) {
 				hasBehaviorLogic = true;
 				System.out.println("[hasBehaviorLogic = true] : " + "index: " + i + ", behaviors: " + map.keySet()
@@ -156,6 +172,21 @@ public class MainTestGenerateLogic {
 					System.out.println("[hasValueLogic = true] : " + "index: " + i + ", behaviors: " + map.keySet()
 					+ ", uniqueIds: " + uniqueIds.toString());
 					 getConcepts(behaviors,uniqueIds,"hasValueLogic");
+//					 for(Map.Entry<String, List<PatternBehaviors>> entry: map.entrySet()){
+////							System.out.println("XXXXX");
+//							List<PatternBehaviors> newlist= entry.getValue();
+////							for(PatternBehaviors patternBehaviors:newlist){
+////								System.out.println(patternBehaviors.getPatternId());
+////							}
+////							System.out.println(newlist.size());
+//							if(entry.getValue().size()>1){
+//								judgeLogic(i+1,entry.getValue());
+//							}else {
+////								System.out.println("oooo");
+//								judgeLogic(i+1,entry.getValue());
+//							}				
+////							System.out.println("XXXXX");
+//						}
 				}
 
 			}
@@ -166,19 +197,26 @@ public class MainTestGenerateLogic {
 	public static Boolean hasValueLogic(List<String> uniqueIds) throws Exception {
 		Boolean hasValueLogic = false;
 		List<Map<String, Object>> behaviorsAllInfoList = new ArrayList<>();
-		behaviorsAllInfoList = getBehaviorsAllInfoFromMongoDB("localhost", "IRA_test", "behaviors", uniqueIds);
+		behaviorsAllInfoList = getBehaviorsAllInfoFromMongoDB("localhost", "IRA_multiVideo", "behaviors", uniqueIds);
 		// hasValueLogic(uniqueIds);
 
 		String baseTitle = (String) behaviorsAllInfoList.get(0).get("title");
 		String baseValue = (String) behaviorsAllInfoList.get(0).get("value");
 //		System.out.println("baseTitle: " + baseTitle);
 //		System.out.println("baseValue: " + baseValue);
+		int i=0;
 		for (Map<String, Object> behaviorsAllInfo : behaviorsAllInfoList) {
 			String title = (String) behaviorsAllInfo.get("title");
 			String value = (String) behaviorsAllInfo.get("value");
 //			System.out.println("Title: " + title);
 //			System.out.println("Value: " + value);
+			i++;
 			if ((baseTitle.equals(title)) && (!baseValue.equals(value))) {
+				System.out.println(i);
+				System.out.println("baseTitle: " + baseTitle);
+				System.out.println("baseValue: " + baseValue);
+				System.out.println("Title: " + title);
+				System.out.println("Value: " + value);
 				return hasValueLogic = true;
 			
 			}
@@ -189,12 +227,12 @@ public class MainTestGenerateLogic {
 
 	public static void getConcepts(List<String> behaviors, List<String> uniqueIds, String logicType) throws Exception {
 		List<Map<String, Object>> behaviorsAllInfoList = new ArrayList<>();
-		behaviorsAllInfoList = getBehaviorsAllInfoFromMongoDB("localhost", "IRA_test", "behaviors", uniqueIds);
-		String path = "/Users/ling/Documents/Eclipseworkspace/Weka/NewPattern/src/test/" + logicType
+		behaviorsAllInfoList = getBehaviorsAllInfoFromMongoDB("localhost", "IRA_multiVideo", "behaviors", uniqueIds);
+		String path = "/Users/ling/Documents/Eclipseworkspace/Weka/NewPattern/src/test/" + System.currentTimeMillis() + logicType
 				+ uniqueIds.toString() + ".xlsx";
 		System.out.println(path);
 		createExcel(behaviorsAllInfoList, logicType, path);
-		String csvPath = "/Users/ling/Documents/Eclipseworkspace/Weka/NewPattern/src/test/" + logicType + uniqueIds
+		String csvPath = "/Users/ling/Documents/Eclipseworkspace/Weka/NewPattern/src/test/" + System.currentTimeMillis() + logicType + uniqueIds
 				+ ".csv";
 		 XLSX2CSV xlsx2csv = new XLSX2CSV(path, csvPath);
 		 xlsx2csv.process();

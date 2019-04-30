@@ -3,7 +3,7 @@ package algorithms.splitpatterns;
 import java.util.ArrayList;
 import java.util.List;
 
-public class behaviorsChain {
+public class BehaviorsChain {
 	 private List<String> behaviorsChain = new ArrayList<String>();
 	 private List<String> uniqueIdsChain = new ArrayList<String>();
 

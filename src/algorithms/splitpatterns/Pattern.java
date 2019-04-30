@@ -29,6 +29,16 @@ public class Pattern {
 	     this.newBehaviorChain = new ArrayList<>();
 	     this.uniqueIdsList = new ArrayList<List<String>>();
 	}
+	 
+	 public Pattern(List<String> behaviorChain, List<List<String>> uniqueIdsList, int weight) {
+	     this.behaviorChain = behaviorChain;
+	     this.weight = weight;
+	     this.uniqueIdsList = uniqueIdsList;
+	     
+//	     this.internalCycle = new InternalCycle();
+//	     this.hasInternalCycle = false;
+//	     this.newBehaviorChain = new ArrayList<>();	     
+	}
 	
 	 
 	 public int getWeight() {
@@ -166,7 +176,7 @@ public class Pattern {
 	@SuppressWarnings("unchecked")
 	public JSONObject toJsonObject() {
 		JSONObject output = new JSONObject();
-		output.put("chainId", this.pattern_name);
+		output.put("chainId", String.valueOf(System.currentTimeMillis()));
 		output.put("behaviorChain",this.getBehaviorChain());
 		output.put("weights", this.weight);
 		output.put("uniqueIdsList", uniqueIdsList);
@@ -208,6 +218,13 @@ public class Pattern {
 
 	public void setNewBehaviorChain(List<String> newBehaviorChain) {
 		this.newBehaviorChain = newBehaviorChain;
+	}
+
+	public void addUniqueIdsToList(List<List<String>> uniqueIdsList2) {
+		for(List<String> uniqueIds:uniqueIdsList2){
+			this.uniqueIdsList.add(uniqueIds);
+		}	
+		
 	}
 	   
 

@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.bson.Document;
@@ -15,31 +16,36 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 
 public class GetBehaviors {
-	public static Map<String, String> getBehaviorsFromMongoDB(String clientName, String databaseName, String collectionName) throws Exception{
-		Map<String, String> behaviorsMap = new LinkedHashMap<>();
+	public static Map<String, List<Behaviors>> getBehaviorsFromMongoDB(String clientName, String databaseName, String collectionName) throws Exception{
+		Map<String, List<Behaviors>> map = new HashMap<>();
 		try{		 
 			 MongoClient mongoClient =  new MongoClient(clientName,27017);
 			 MongoDatabase mongoDatabase =  mongoClient.getDatabase(databaseName);
 			 System.out.println("Connect to database successfully");			 
 			 MongoCollection<Document> collection =  mongoDatabase.getCollection(collectionName);			 	 
 			 MongoCursor<Document> cursor = collection.find().iterator();
-//			 ArrayList<String> behaviorsList = new ArrayList<>();
-			 			 
+		 
+			 
 	         while(cursor.hasNext()){  
 	        	Document document = cursor.next();
 	        	String uniqueId =  (String) document.get("uniqueId");
-	        	String behaviorID = (String) document.get("behaviorID");	        	
-//	        	behaviorsList.add(behaviorID);
-	        	behaviorsMap.put(uniqueId, behaviorID);
+	        	String behaviorID = (String) document.get("behaviorID");	
+	        	String videoId = (String)document.get("videoId");
+	        	Behaviors behaviors = new Behaviors(uniqueId, behaviorID, videoId);
+	        	if(map.containsKey(behaviors.getVideoId())){  //map中存在此id，将数据存放当前key的map中
+					map.get(behaviors.getVideoId()).add(behaviors);
+				}else{ //map中不存在，新建key，用来存放数据
+					List<Behaviors> tmpList = new ArrayList<>();
+					tmpList.add(behaviors);
+					map.put(behaviors.getVideoId(), tmpList);
+				}
 	         }          
-//	         System.out.println(behaviorsList); 
-//	         String path="behavior3.txt";
-//	 		 writeFileContext(behaviorsList,path);	
+
 			 mongoClient.close();
 		 }catch(MongoException e){
 			e.printStackTrace();
 		}
-		return behaviorsMap; 
+		return map; 
 	}
 //	public static void writeFileContext(ArrayList<String> behaviorChain, String path) throws Exception {
 //		File file = new File(path);

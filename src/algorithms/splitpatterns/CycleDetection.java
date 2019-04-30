@@ -51,6 +51,7 @@ public class CycleDetection {
         trace = new ArrayList<>();//路径
         verticesNumber = this.graph.getVerticesNumber();
         oriString = inputString;
+        this.start = inputString.substring(0, 1);
     }
     
     
@@ -101,28 +102,18 @@ public class CycleDetection {
 //	}
     
   
-    public void hasCycle() {
+    public boolean hasCycle() {
         findCycle(this.graph.getVerticesName(0));
 //        System.out.println(this.graph.getVerticesName(0));
-        if(!hasCycle)
+        if(!hasCycle){
             System.out.println("No Cycle.");
-//        sortCycleList();
-//        printCycleList();
-//        System.out.println("--------------Behavior split-----------------");
-//        splitCycleList();
-//        SplitInputStringByCycle();
-        setStart(findStartVertex(cycleAllList,graph));
-//        System.out.println(start); 
-       
-//        String sp[] = oriString.split(start);
-//        for(String s:sp) {
-//        	System.out.println(s);
-//        }  
+            return false;
+        }else {
+        	setStart(findStartVertex(cycleAllList,graph));
+        	return true;
+		}
     }
    
-	
-	
-	
 	public void findCycle(String v)
     {
        int j=0;   

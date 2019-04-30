@@ -1,0 +1,7 @@
+"Main Info.XMC Engage ID","Main Info.Status","Main Info.Sub Status","Required Fields.Subject","Required Fields.# of Securities","Required Fields.Systems Requiring Setup","Actions.Action Type","Complete Ticket.# of Processed Securities","Close Ticket.CloseType","title_value"
+"XE181231S0387294","Assigned","Pending","Complete","1","SMC","null","null","null","engageTicket.Actions.ActionType=Complete"
+"XE181231S0387295","Assigned","Pending","Complete","2","SMC","null","null","null","engageTicket.Actions.ActionType=Complete"
+"XE181231S0387296","Assigned","Pending","Complete","3","SMC","null","null","null","engageTicket.Actions.ActionType=Complete"
+"XE181231S0387297","Assigned","Pending","Complete","2","SMC","null","null","null","engageTicket.Actions.ActionType=Complete"
+"XE181228S0386926","Assigned","Pending","Close","1","SMC","null","null","null","engageTicket.Actions.ActionType=Close"
+"XE181228S0386927","Assigned","Pending","Close","1","SMC","null","null","null","engageTicket.Actions.ActionType=Close"
