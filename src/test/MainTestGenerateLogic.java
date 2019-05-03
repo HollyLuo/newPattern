@@ -147,10 +147,19 @@ public class MainTestGenerateLogic {
 				hasBehaviorLogic = true;
 				System.out.println("[hasBehaviorLogic = true] : " + "index: " + i + ", behaviors: " + map.keySet()
 				+ ", uniqueIds: " + uniqueIds.toString());	
+				
 				getConcepts(behaviors, uniqueIds, "hasBehaviorLogic");
 				for(Map.Entry<String, List<PatternBehaviors>> entry: map.entrySet()){
-//					System.out.println("XXXXX");
-					List<PatternBehaviors> newlist= entry.getValue();
+					System.out.println("XXXXX key: " + entry.getKey());
+					//uniqueIds.
+					List<String> subUniqueIds = new ArrayList<>();
+					for(PatternBehaviors pattern: entry.getValue()){
+						for (List<String> uniqueId : pattern.getUniqueIdsList()) {
+							subUniqueIds.add(uniqueId.get(i));
+						}
+					}
+					System.out.println("subUniqueIds" + subUniqueIds);
+//					List<PatternBehaviors> newlist= entry.getValue();
 //					for(PatternBehaviors patternBehaviors:newlist){
 //						System.out.println(patternBehaviors.getPatternId());
 //					}
@@ -158,7 +167,14 @@ public class MainTestGenerateLogic {
 					if(entry.getValue().size()>1){
 						judgeLogic(i+1,entry.getValue());
 					}else {
-//						System.out.println("oooo");
+						System.out.println("oooo");
+						boolean hasValueLogic = hasValueLogic(subUniqueIds);
+						System.out.println("[hasValueLogic = " + hasValueLogic +"]");
+						if (hasValueLogic) {				
+							System.out.println("[hasValueLogic = true] : " + "index: " + i + ", behaviors: " + entry.getKey()
+							+ ", uniqueIds: " + subUniqueIds.toString());
+							 getConcepts(behaviors,subUniqueIds,"hasValueLogic");
+						}
 						judgeLogic(i+1,entry.getValue());
 					}				
 //					System.out.println("XXXXX");
