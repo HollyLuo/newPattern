@@ -1,0 +1,26 @@
+/* 1 */
+{
+    "_id" : ObjectId("5ce3b6f7b4e4e77126ffba6a"),
+    "patternID" : "1",
+    "weight" : "3",
+    "behaviors" : [ 
+        {
+            "bahaviorID" : "1",
+            "index" : "0",
+            "uniqueIDs" : [],
+            "action" : "left_click",
+            "actioned_concept" : "",
+            "actioned_picture" : "",
+            "actioned_value" : ""
+        }, 
+        {
+            "bahaviorID" : "2",
+            "index" : "1",
+            "uniqueIDs" : [],
+            "action" : "left_click",
+            "actioned_concept" : "",
+            "actioned_picture" : "",
+            "actioned_value" : ""
+        }
+    ]
+}
