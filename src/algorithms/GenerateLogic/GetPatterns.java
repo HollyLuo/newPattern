@@ -112,9 +112,38 @@ public class GetPatterns {
 			 mongoClient.close();
 		 }catch(MongoException e){
 			e.printStackTrace();
-		}
-		return PatternBehaviorsList; 
-	}
+		 }
+		 return PatternBehaviorsList; 
+	 }
+	@SuppressWarnings("unchecked")
+	public static Map<String,Knowledge> getKnowledgeMap(String clientName, String databaseName) throws Exception{
+		Map<String,Knowledge> knowledgesMap = new LinkedHashMap<>();
+		try{		 			 
+			 MongoClient mongoClient =  new MongoClient(clientName,27017);
+			 MongoDatabase mongoDatabase =  mongoClient.getDatabase(databaseName);
+			 System.out.println("Connect to database successfully");	
+
+			 MongoCollection<Document> knowledgeCollection =  mongoDatabase.getCollection("knowledge_test");	
+			 MongoCursor<Document> knowledgeCursor = knowledgeCollection.find().iterator();
+			 while(knowledgeCursor.hasNext()){
+				 Document document = knowledgeCursor.next();
+				 System.out.println(document.toJson());
+				 String knowledgeId;	
+				 String knowledgeName;
+				 List<String> patternIds;
+				 knowledgeId = (String) document.get("knowledgeId");
+				 knowledgeName = (String) document.get("knownledgeName");
+				 patternIds = (List<String>) document.get("patternIds");
+				 
+				 Knowledge knowledge = new Knowledge(knowledgeId, knowledgeName, patternIds);
+				 knowledgesMap.put(knowledgeId, knowledge);
+			 }
+			 mongoClient.close();
+		 }catch(MongoException e){
+			e.printStackTrace();
+		 }
+		 return knowledgesMap; 
+	 }
 	
 	public static List<Pattern> getBehaviorChains(String clientName, String databaseName, String collectionName) throws Exception{
 		Map<String, String> behaviorsMap = new LinkedHashMap<>();
@@ -161,6 +190,28 @@ public class GetPatterns {
 			e.printStackTrace();
 		}
 		return patternList; 
+	}
+
+	public static void updateKnowledge(String clientName, String databaseName, Knowledge knowledge) {
+		try{		 			 
+			 MongoClient mongoClient =  new MongoClient(clientName,27017);
+			 MongoDatabase mongoDatabase =  mongoClient.getDatabase(databaseName);
+			 System.out.println("Connect to database successfully");	
+
+			 MongoCollection<Document> knowledgeCollection =  mongoDatabase.getCollection("knowledge_test");	
+			 BasicDBObject filter = new BasicDBObject();
+			 filter.put("knowledgeId",knowledge.getKnowledgeId());
+		     System.out.println(filter.toJson());
+		     BasicDBObject newObj = new BasicDBObject();
+		     newObj.put("patternIds",knowledge.getPatternIds());
+		     System.out.println(newObj.toJson());
+		     BasicDBObject update = new BasicDBObject("$set",newObj);
+		     knowledgeCollection.updateOne(filter,update);	
+		}
+		catch (Exception e) {
+			
+		}
+		
 	}
 
 	

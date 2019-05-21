@@ -4,17 +4,20 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.poi.ss.formula.functions.Index;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.bson.Document;
+import org.json.simple.JSONObject;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
@@ -25,8 +28,14 @@ import com.mongodb.client.MongoDatabase;
 
 import algorithms.Convert.XLSX2CSV;
 import algorithms.GenerateLogic.GetPatterns;
+import algorithms.GenerateLogic.Knowledge;
+import algorithms.GenerateLogic.Logic;
 import algorithms.GenerateLogic.PatternBehaviors;
-import algorithms.splitpatterns.cycle.Vertex;;
+import algorithms.splitpatterns.cycle.Vertex;
+import weka.classifiers.trees.J48;
+import weka.core.Instances;
+import weka.core.SerializationHelper;
+import weka.core.converters.ConverterUtils.DataSource;;
 
 public class MainTestGenerateLogic {
 
@@ -34,86 +43,64 @@ public class MainTestGenerateLogic {
 		List<PatternBehaviors> patternBehaviorsList = new ArrayList<>();
 		patternBehaviorsList = GetPatterns.getAllPatterns("localhost", "IRA_multiVideo");
 		float support = 2;
+		Map<String,Knowledge> knowledgesMap = new LinkedHashMap<>();
+		knowledgesMap = GetPatterns.getKnowledgeMap("localhost", "IRA_multiVideo");
+		Knowledge knowledge = knowledgesMap.get("1");
 		
 		List<PatternBehaviors> frequencyPatternBehaviorsList = new ArrayList<>();
+		List<String> frequencyPatternIds = new ArrayList<>();
 		int size = 0;
 		for(PatternBehaviors new_pattern : patternBehaviorsList){
 			size += new_pattern.getUniqueIdsList().size();
 		}
-		System.out.println("size: " + size);
+//		System.out.println("size: " + size);
 	    System.out.println("--------------Frequecy Pattern -----------------");
         for(PatternBehaviors new_pattern : patternBehaviorsList){
     	    if(new_pattern.isFrequencyPattern(size, support)){
     	    	frequencyPatternBehaviorsList.add(new_pattern);
+    	    	frequencyPatternIds.add(new_pattern.getPatternId());
     	    }
-      }    
-		
-		// System.out.println("dsssss");
-		judgeLogic(0, frequencyPatternBehaviorsList);
-		// int length = 0;
-		// for (PatternBehaviors item : patternBehaviorsList) {
-		// item.printPatternBehaviors();
-		// length = item.getPatternBehaviors().size() > length ?
-		// item.getPatternBehaviors().size() : length;
-		// }
-		// // Logic judge between patterns
-		//
-		// for (int i = 0; i < length; i++) {
-		// boolean hasBehaviorLogic = false;
-		// // boolean hasValueLogic = false;
-		// List<String> behaviors = new ArrayList<>();
-		// String baseBehaviorId =
-		// patternBehaviorsList.get(0).getPatternBehaviors().get(i);
-		// List<String> uniqueIds = new ArrayList<>();
-		// boolean splitPattern = false;
-		// if (splitPattern == false) {
-		// for (PatternBehaviors pattern : patternBehaviorsList) {
-		// String behaviorId = pattern.getPatternBehaviors().get(i);
-		// if (i < pattern.getPatternBehaviors().size()) {
-		// behaviors.add(behaviorId);
-		// }
-		// if (baseBehaviorId != behaviorId) {
-		// hasBehaviorLogic = true;
-		// }
-		// for (List<String> uniqueId : pattern.getUniqueIdsList()) {
-		// uniqueIds.add(uniqueId.get(i));
-		// }
-		// // System.out.println("index: " + i +", " +
-		// // behaviors.toString() + ", " + uniqueIdsLists.toString());
-		// }
-		// }
-		// if (hasBehaviorLogic) {
-		// System.out.println("Logic: " + "index: " + i + ", behaviors: " +
-		// behaviors.toString() + ", uniqueIds: "
-		// + uniqueIds.toString());
-		// getConcepts(behaviors, uniqueIds, "hasBehaviorLogic");
-		// splitPattern = true;
-		// } else {
-		// // List<Map<String, Object>> behaviorsAllInfoList = new
-		// // ArrayList<>();
-		// // behaviorsAllInfoList =
-		// // getBehaviorsAllInfoFromMongoDB("localhost", "IRA_test",
-		// // "behaviors", uniqueIds);
-		// System.out.println("index: " + i + ", " + behaviors.toString() + ", "
-		// + uniqueIds.toString());
-		// if (hasValueLogic(uniqueIds)) {
-		// getConcepts(behaviors, uniqueIds, "hasValueLogic");
-		// }
-		//
-		// }
-		// }
+        }  
+        System.out.println("Frequecy Pattern IDs : " + frequencyPatternIds.toString());
+
+        if(compare(knowledge.getPatternIds(),frequencyPatternIds)){
+        	System.out.println("no update for knowledge");
+        }else {
+        	knowledge.setPatternIds(frequencyPatternIds);
+        	GetPatterns.updateKnowledge("localhost", "IRA_multiVideo", knowledge);
+        	System.out.println("updated knowledge");
+		}    
+        
+        System.out.println("--------------Store Frequecy Pattern To Database-----------------");
+        
+        
+        System.out.println("--------------Logic Judgement -----------------");
+        Map<String, Logic> logicMaps = new HashMap<>();
+        judgeLogic(0, frequencyPatternBehaviorsList, logicMaps);
 	}
 
-	private static void judgeLogic(int firstIndex, List<PatternBehaviors> patternBehaviorsList) throws Exception {
+	public static <T extends Comparable<T>> boolean compare(List<T> a, List<T> b) {
+		  if(a.size() != b.size())
+		    return false;
+		  Collections.sort(a);
+		  Collections.sort(b);
+		  for(int i=0;i<a.size();i++){
+		    if(!a.get(i).equals(b.get(i)))
+		      return false;
+		  }
+		  return true;
+	}
+	private static void judgeLogic(int firstIndex, List<PatternBehaviors> patternBehaviorsList, Map<String, Logic> logicMaps) throws Exception {
 		int length = 0;
+		List<String> patternList = new ArrayList<>();
 		for (PatternBehaviors item : patternBehaviorsList) {
 			item.printPatternBehaviors();
-//			System.out.println("dddd");
 			length = item.getPatternBehaviors().size() > length ? item.getPatternBehaviors().size() : length;
+			patternList.add(item.getPatternId());
+			
 		}
 		for (int i = firstIndex; i < length; i++) {
 			boolean hasBehaviorLogic = false;
-			// boolean hasValueLogic = false;
 			//判断前面没有Logic分支。
 			List<String> behaviors = new ArrayList<>();
 			List<String> uniqueIds = new ArrayList<>();
@@ -127,13 +114,13 @@ public class MainTestGenerateLogic {
 						newPatternBehaviorsList = new ArrayList<>();
 						newPatternBehaviorsList.add(pattern);
 						map.put(behaviorId, newPatternBehaviorsList);
-						System.out.println("111 : " + behaviorId);
+//						System.out.println("111 : " + behaviorId);
 					} else {
 						newPatternBehaviorsList.add(pattern);
 						map.put(behaviorId, newPatternBehaviorsList);
-						System.out.println("222 : " + behaviorId);
+//						System.out.println("222 : " + behaviorId);
 					}
-
+					
 					// behaviors.add(behaviorId);
 					for (List<String> uniqueId : pattern.getUniqueIdsList()) {
 						uniqueIds.add(uniqueId.get(i));
@@ -142,13 +129,23 @@ public class MainTestGenerateLogic {
 				// System.out.println("index: " + i +", " + behaviors.toString()
 				// + ", " + uniqueIdsLists.toString());
 			}
-			System.out.println("map.keySet: " + map.keySet());
+			System.out.println("------------map.keySet: " + map.keySet() + "--------------");
 			if (map.keySet().size() > 1) {
 				hasBehaviorLogic = true;
 				System.out.println("[hasBehaviorLogic = true] : " + "index: " + i + ", behaviors: " + map.keySet()
-				+ ", uniqueIds: " + uniqueIds.toString());	
+				+ ", uniqueIds: " + uniqueIds.toString());
+				String behaviorLogicId = patternList.toString() + "_" + i + "_" + map.keySet().toString();
+				Logic behaviorLogic = new Logic();
+				behaviorLogic.setID(behaviorLogicId);
+				behaviorLogic.setLogicType("BehaviorLogic");
+				logicMaps.put(behaviorLogicId, behaviorLogic);
+				System.out.println("logicId: " + behaviorLogic.getID() + "; LogicType: " + behaviorLogic.getLogicType());
+				String csvPath = getConcepts(behaviors, uniqueIds, "hasBehaviorLogic");
+				String modelName = "BehaviorLogic" + behaviorLogic.getID();
+				generateDesicionTree(csvPath,modelName);
+				behaviorLogic.setLogicModelAddress(System.getProperty("user.dir") + "/" + modelName);
+				writeLogicToDatabase("localhost", "IRA_multiVideo", "logic", behaviorLogic);
 				
-				getConcepts(behaviors, uniqueIds, "hasBehaviorLogic");
 				for(Map.Entry<String, List<PatternBehaviors>> entry: map.entrySet()){
 					System.out.println("XXXXX key: " + entry.getKey());
 					//uniqueIds.
@@ -159,13 +156,8 @@ public class MainTestGenerateLogic {
 						}
 					}
 					System.out.println("subUniqueIds" + subUniqueIds);
-//					List<PatternBehaviors> newlist= entry.getValue();
-//					for(PatternBehaviors patternBehaviors:newlist){
-//						System.out.println(patternBehaviors.getPatternId());
-//					}
-//					System.out.println(newlist.size());
 					if(entry.getValue().size()>1){
-						judgeLogic(i+1,entry.getValue());
+						judgeLogic(i+1,entry.getValue(),logicMaps);
 					}else {
 						System.out.println("oooo");
 						boolean hasValueLogic = hasValueLogic(subUniqueIds);
@@ -173,9 +165,20 @@ public class MainTestGenerateLogic {
 						if (hasValueLogic) {				
 							System.out.println("[hasValueLogic = true] : " + "index: " + i + ", behaviors: " + entry.getKey()
 							+ ", uniqueIds: " + subUniqueIds.toString());
-							 getConcepts(behaviors,subUniqueIds,"hasValueLogic");
+							
+							String valueLogicId = patternList.toString() + "_" + i + "_" + map.keySet().toString();
+							Logic valueLogic = new Logic();
+							valueLogic.setID(valueLogicId);
+							valueLogic.setLogicType("ValueLogic");
+							logicMaps.put(valueLogicId, valueLogic);
+							System.out.println("logicId: " + valueLogic.getID() + "; LogicType: " + valueLogic.getLogicType());
+							String csvPath2 = getConcepts(behaviors,subUniqueIds,"hasValueLogic");
+							String modelName2 = valueLogic.getLogicType() + valueLogic.getID();
+							generateDesicionTree(csvPath2,modelName2);
+							valueLogic.setLogicModelAddress(System.getProperty("user.dir") + "/" + modelName2);
+							writeLogicToDatabase("localhost", "IRA_multiVideo", "logic", valueLogic);
 						}
-						judgeLogic(i+1,entry.getValue());
+						judgeLogic(i+1,entry.getValue(),logicMaps);
 					}				
 //					System.out.println("XXXXX");
 				}
@@ -187,27 +190,41 @@ public class MainTestGenerateLogic {
 				if (hasValueLogic) {				
 					System.out.println("[hasValueLogic = true] : " + "index: " + i + ", behaviors: " + map.keySet()
 					+ ", uniqueIds: " + uniqueIds.toString());
-					 getConcepts(behaviors,uniqueIds,"hasValueLogic");
-//					 for(Map.Entry<String, List<PatternBehaviors>> entry: map.entrySet()){
-////							System.out.println("XXXXX");
-//							List<PatternBehaviors> newlist= entry.getValue();
-////							for(PatternBehaviors patternBehaviors:newlist){
-////								System.out.println(patternBehaviors.getPatternId());
-////							}
-////							System.out.println(newlist.size());
-//							if(entry.getValue().size()>1){
-//								judgeLogic(i+1,entry.getValue());
-//							}else {
-////								System.out.println("oooo");
-//								judgeLogic(i+1,entry.getValue());
-//							}				
-////							System.out.println("XXXXX");
-//						}
+					String valueLogicId = patternList.toString() + "_" + i + "_" + map.keySet().toString();
+//					System.out.println("logicId: " + valueLogicId);
+					Logic valueLogic = new Logic();
+					valueLogic.setID(valueLogicId);
+					valueLogic.setLogicType("ValueLogic");
+					logicMaps.put(valueLogicId, valueLogic);
+					System.out.println("logicId: " + valueLogic.getID() + "; LogicType: " + valueLogic.getLogicType());
+					
+					String csvPath = getConcepts(behaviors,uniqueIds,"hasValueLogic");
+					String modelName = valueLogic.getLogicType() + valueLogic.getID();
+					generateDesicionTree(csvPath,modelName);
+					valueLogic.setLogicModelAddress(System.getProperty("user.dir") + "/" + modelName);
+					writeLogicToDatabase("localhost", "IRA_multiVideo", "logic", valueLogic);
 				}
 
 			}
 		}
 
+	}
+
+	private static void writeLogicToDatabase(String clientName, String databaseName, String collectionName, Logic logic) {
+		try {
+			MongoClient mongoClient = new MongoClient(clientName, 27017);
+			MongoDatabase mongoDatabase = mongoClient.getDatabase(databaseName);
+			System.out.println("Connect to database successfully");
+			MongoCollection<Document> collection = mongoDatabase.getCollection(collectionName);		
+			
+			JSONObject jsonObject = logic.toJsonObject();
+			Document document = Document.parse(jsonObject.toJSONString());
+			collection.insertOne(document);
+			mongoClient.close();
+		} catch (MongoException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	public static Boolean hasValueLogic(List<String> uniqueIds) throws Exception {
@@ -218,21 +235,18 @@ public class MainTestGenerateLogic {
 
 		String baseTitle = (String) behaviorsAllInfoList.get(0).get("title");
 		String baseValue = (String) behaviorsAllInfoList.get(0).get("value");
-//		System.out.println("baseTitle: " + baseTitle);
-//		System.out.println("baseValue: " + baseValue);
+
 		int i=0;
 		for (Map<String, Object> behaviorsAllInfo : behaviorsAllInfoList) {
 			String title = (String) behaviorsAllInfo.get("title");
 			String value = (String) behaviorsAllInfo.get("value");
-//			System.out.println("Title: " + title);
-//			System.out.println("Value: " + value);
 			i++;
 			if ((baseTitle.equals(title)) && (!baseValue.equals(value))) {
-				System.out.println(i);
-				System.out.println("baseTitle: " + baseTitle);
-				System.out.println("baseValue: " + baseValue);
-				System.out.println("Title: " + title);
-				System.out.println("Value: " + value);
+//				System.out.println(i);
+				System.out.println("---baseTitle: " + baseTitle);
+				System.out.println("---baseValue: " + baseValue);
+				System.out.println("---Title: " + title);
+				System.out.println("---Value: " + value);
 				return hasValueLogic = true;
 			
 			}
@@ -241,18 +255,34 @@ public class MainTestGenerateLogic {
 
 	}
 
-	public static void getConcepts(List<String> behaviors, List<String> uniqueIds, String logicType) throws Exception {
+	public static String getConcepts(List<String> behaviors, List<String> uniqueIds, String logicType) throws Exception {
 		List<Map<String, Object>> behaviorsAllInfoList = new ArrayList<>();
 		behaviorsAllInfoList = getBehaviorsAllInfoFromMongoDB("localhost", "IRA_multiVideo", "behaviors", uniqueIds);
-		String path = "/Users/ling/Documents/Eclipseworkspace/Weka/NewPattern/src/test/" + System.currentTimeMillis() + logicType
+		String path = "/Users/ling/Documents/Eclipseworkspace/Weka/NewPattern/src/test/" + logicType
 				+ uniqueIds.toString() + ".xlsx";
+//		 System.currentTimeMillis() +
 		System.out.println(path);
 		createExcel(behaviorsAllInfoList, logicType, path);
-		String csvPath = "/Users/ling/Documents/Eclipseworkspace/Weka/NewPattern/src/test/" + System.currentTimeMillis() + logicType + uniqueIds
+		String csvPath = "/Users/ling/Documents/Eclipseworkspace/Weka/NewPattern/src/test/" + logicType + uniqueIds
 				+ ".csv";
 		 XLSX2CSV xlsx2csv = new XLSX2CSV(path, csvPath);
 		 xlsx2csv.process();
+		 return csvPath;
 	}
+
+	public static void generateDesicionTree(String csvPath, String name) throws Exception {
+		Instances data = DataSource.read(csvPath);
+	    if (data.classIndex() == -1)
+	    	data.setClassIndex(data.numAttributes() - 1);    
+	    String[] options=weka.core.Utils.splitOptions("-U -M 1");
+	    System.out.println(data.classAttribute());
+	    J48 tree = new J48();
+	    tree.setOptions(options);		    
+		tree.buildClassifier(data);
+		System.out.println("train end");		
+		SerializationHelper.write(name, tree);//参数一为模型保存文件，classifier4为要保存的模型	
+	}
+	
 
 	public static List<Map<String, Object>> getBehaviorsAllInfoFromMongoDB(String clientName, String databaseName,
 			String collectionName, List<String> uniqueIds) throws Exception {

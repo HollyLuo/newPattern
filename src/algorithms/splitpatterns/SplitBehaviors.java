@@ -46,12 +46,7 @@ public class SplitBehaviors {
 			
 		}	
 		String inputString = iString.substring(0, iString.length()-1);
-				
-//		for(Iterator<String> it=behaviorsList.iterator();it.hasNext();){   
-//			 System.out.println(it.next()); 
-//		}
-		System.out.println(inputString);
-		
+		System.out.println(inputString);		
         System.out.println("--------------scan the behavior chain-----------------");
        
 		Vertex currentVertex;
@@ -316,15 +311,15 @@ public class SplitBehaviors {
 						 System.out.println("Connect to database successfully");	
 
 						 MongoCollection<Document> patternCollection =  mongoDatabase.getCollection("patterns_test");	
-						 BasicDBObject old = new BasicDBObject();
-					     old.put("patternBehaviors",mergePattern.getBehaviorChain());
+						 BasicDBObject filter = new BasicDBObject();
+						 filter.put("patternBehaviors",mergePattern.getBehaviorChain());
 //					     System.out.println("updated patternBehaviors: " + old.toJson());
 					     BasicDBObject newObj = new BasicDBObject();
 					     newObj.put("uniqueIdsList",patternBehaviors.getUniqueIdsList());
 					     newObj.put("weights",patternBehaviors.getUniqueIdsList().size());
 //					     System.out.println("updated uniqueIdsList: " + newObj.toJson());
 					     BasicDBObject update = new BasicDBObject("$set",newObj);
-					     patternCollection.updateOne(old,update);	
+					     patternCollection.updateOne(filter,update);	
 					     existPattern = true;
 						 }
 					catch (Exception e) {
@@ -349,7 +344,7 @@ public class SplitBehaviors {
 	    }else {
 	    	JSONObject mergePatternJson = new JSONObject();
 	    	System.out.println("xxx");
-	    	mergePatternJson.put("patternId", System.currentTimeMillis());
+	    	mergePatternJson.put("patternId", String.valueOf(System.currentTimeMillis()%10));
 	    	mergePatternJson.put("patternBehaviors", mergePattern.getBehaviorChain());
 	    	mergePatternJson.put("weights", mergePattern.getWeight());
 	    	mergePatternJson.put("chainBranches", chainBranchIds);
