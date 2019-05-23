@@ -27,11 +27,15 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 
 import algorithms.Convert.XLSX2CSV;
+import algorithms.GenerateLogic.ActionInfo;
+import algorithms.GenerateLogic.BehaviorInfo;
+import algorithms.GenerateLogic.FrequecyPattern;
 import algorithms.GenerateLogic.GetPatterns;
 import algorithms.GenerateLogic.Knowledge;
 import algorithms.GenerateLogic.Logic;
 import algorithms.GenerateLogic.PatternBehaviors;
 import algorithms.splitpatterns.cycle.Vertex;
+import java_cup.internal_error;
 import weka.classifiers.trees.J48;
 import weka.core.Instances;
 import weka.core.SerializationHelper;
@@ -72,11 +76,85 @@ public class MainTestGenerateLogic {
 		}    
         
         System.out.println("--------------Store Frequecy Pattern To Database-----------------");
-        
+        StoreFrequencyPatterns(frequencyPatternBehaviorsList);
         
         System.out.println("--------------Logic Judgement -----------------");
         Map<String, Logic> logicMaps = new HashMap<>();
         judgeLogic(0, frequencyPatternBehaviorsList, logicMaps);
+	}
+
+/**
+ * 存储频繁的pattern
+  patternID: ""
+	weights: 
+	behaviors: {
+	  behaviorID: 
+	  index:
+	  uniqueIDs:[]
+	  action: ""
+	  actioned_concept: ""
+	  actioned_picture: ""
+	  actioned_value: ""
+	},
+	{}
+ * @param frequencyPatternsList
+ */
+	private static void StoreFrequencyPatterns(List<PatternBehaviors> frequencyPatternsList) {
+		for(PatternBehaviors pattern : frequencyPatternsList){
+			FrequecyPattern frequecyPattern = new FrequecyPattern();
+			frequecyPattern.setPatternID(pattern.getPatternId());
+			frequecyPattern.setWeights(pattern.getWeights());
+			List<String> behaviorIDLists = pattern.getPatternBehaviors();
+			List<BehaviorInfo> behaviorInfoLists = new ArrayList<>();
+			for(int i = 0; i<behaviorIDLists.size(); i++){
+				String behavior = behaviorIDLists.get(i);
+				BehaviorInfo behaviorInfo = new BehaviorInfo();
+				behaviorInfo.setBehavaviorID(behavior);
+				behaviorInfo.setIndex(i);
+				List<String> uniqueIDs = new ArrayList<>();
+//				获取behaviorID 对应的所有 uniqueId 
+				for(int j=0; j<pattern.getUniqueIdsList().size(); j++){
+					uniqueIDs.add(pattern.getUniqueIdsList().get(j).get(i));
+				}
+				behaviorInfo.setUniqueIDs(uniqueIDs);
+				Boolean isAllUniqueIDEqual = true;
+				for(String uniqueID : uniqueIDs){
+					//取action; actioned_concept; actioned_picture; actioned_value;
+					
+				}
+				ActionInfo actionInfo = new ActionInfo();
+				behaviorInfo.setActionInfo(actionInfo);
+				behaviorInfoLists.add(behaviorInfo);
+			}
+			frequecyPattern.setBehaviors(behaviorInfoLists);
+			generateFrequencyPatternsJSon(frequecyPattern);
+			
+		}
+	}
+
+	private static void generateFrequencyPatternsJSon(FrequecyPattern frequecyPattern) {
+		JSONObject jsonObject = frequecyPattern.toJsonObject();
+		System.out.println(jsonObject.toJSONString());
+		saveJsonObjectToMongoDb(jsonObject, "localhost", "IRA_multiVideo", "frequency_pattern");
+	}
+
+	private static void saveJsonObjectToMongoDb(JSONObject jsonObject,String clientName,String databaseName,String collectionName) {
+		try{		 
+			 MongoClient mongoClient =  new MongoClient(clientName, 27017);
+			 MongoDatabase mongoDatabase =  mongoClient.getDatabase(databaseName);
+//			 System.out.println("Connect to database successfully");
+			 
+			 MongoCollection<Document> collection =  mongoDatabase.getCollection(collectionName);
+			 System.out.println(jsonObject.toJSONString());
+			 Document document = Document.parse(jsonObject.toJSONString());
+			 
+			 collection.insertOne(document);
+			 mongoClient.close();
+
+		 }catch(MongoException e){
+			e.printStackTrace();
+		} 
+		
 	}
 
 	public static <T extends Comparable<T>> boolean compare(List<T> a, List<T> b) {
@@ -95,33 +173,34 @@ public class MainTestGenerateLogic {
 		List<String> patternList = new ArrayList<>();
 		for (PatternBehaviors item : patternBehaviorsList) {
 			item.printPatternBehaviors();
+//			判断最长的pattern 长度
 			length = item.getPatternBehaviors().size() > length ? item.getPatternBehaviors().size() : length;
 			patternList.add(item.getPatternId());
 			
 		}
+//		遍历index，对比
 		for (int i = firstIndex; i < length; i++) {
 			boolean hasBehaviorLogic = false;
 			//判断前面没有Logic分支。
 			List<String> behaviors = new ArrayList<>();
 			List<String> uniqueIds = new ArrayList<>();
-
+			
+//          Map< key=behaviorId, value=[pattern1, pattern2] >  eg.<0, [pattern1, pattern2]>
 			Map<String, List<PatternBehaviors>> map = new HashMap<>();
 			List<PatternBehaviors> newPatternBehaviorsList = new ArrayList<>();
 			for (PatternBehaviors pattern : patternBehaviorsList) {
 				if (i < pattern.getPatternBehaviors().size()) {
+//					取位置为i的behaviorId
 					String behaviorId = pattern.getPatternBehaviors().get(i);
 					if (!map.containsKey(behaviorId)) {
 						newPatternBehaviorsList = new ArrayList<>();
 						newPatternBehaviorsList.add(pattern);
 						map.put(behaviorId, newPatternBehaviorsList);
-//						System.out.println("111 : " + behaviorId);
 					} else {
 						newPatternBehaviorsList.add(pattern);
 						map.put(behaviorId, newPatternBehaviorsList);
-//						System.out.println("222 : " + behaviorId);
 					}
-					
-					// behaviors.add(behaviorId);
+//                  对index＝i 的 behavior 的 uniqueIds
 					for (List<String> uniqueId : pattern.getUniqueIdsList()) {
 						uniqueIds.add(uniqueId.get(i));
 					}
@@ -130,10 +209,12 @@ public class MainTestGenerateLogic {
 				// + ", " + uniqueIdsLists.toString());
 			}
 			System.out.println("------------map.keySet: " + map.keySet() + "--------------");
+//			若index相同，但不同pattern的behaviorID不同
 			if (map.keySet().size() > 1) {
 				hasBehaviorLogic = true;
 				System.out.println("[hasBehaviorLogic = true] : " + "index: " + i + ", behaviors: " + map.keySet()
 				+ ", uniqueIds: " + uniqueIds.toString());
+//				behaviorLogicId命名： [1,2]_5_[6,9]
 				String behaviorLogicId = patternList.toString() + "_" + i + "_" + map.keySet().toString();
 				Logic behaviorLogic = new Logic();
 				behaviorLogic.setID(behaviorLogicId);
