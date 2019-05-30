@@ -103,9 +103,8 @@ public class MainTestGenerateLogic5 {
         
         System.out.println("--------------Reply  Entries-----------------");
         for(ReplyEntry replyEntry : replyEntriesList){
-        	System.out.println(replyEntry.toString());   	
-        }
-        
+        	System.out.println(replyEntry.toJsonObject());   	
+        }      
 	}
 
 	private static Map<ReplyBehavior, Integer>  GenerateReplyUniqueIDs(int firstIndex, List<PatternBehaviors> frequencyPatternsList,

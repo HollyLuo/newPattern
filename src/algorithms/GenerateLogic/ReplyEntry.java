@@ -4,6 +4,8 @@ import java.awt.print.Printable;
 import java.util.List;
 import java.util.Set;
 
+import org.json.simple.JSONObject;
+
 
 public class ReplyEntry {
 	private int uniqueId;
@@ -78,5 +80,20 @@ public class ReplyEntry {
 		
 		return stringBuffer.toString();
 	}
+	
+	@SuppressWarnings("unchecked")
+    public JSONObject toJsonObject() {
+        JSONObject output = new JSONObject();
+        output.put("uniqueId", this.getUniqueId());
+        output.put("id", this.getId());
+        output.put("actioned_concept",this.getActionInfo().getActionedConcept());
+        output.put("actioned_picture",this.getActionInfo().getActionedPicture());
+        output.put("actioned_value", this.getActionInfo().getActionedValue());
+        output.put("behavior_logic", this.getBehaviorLogic());
+        output.put("value_logic", this.getValueLogic());
+        output.put("default_next_action_ids", this.getNextActionIds());
+        return output;
+        
+    }
 
 }
