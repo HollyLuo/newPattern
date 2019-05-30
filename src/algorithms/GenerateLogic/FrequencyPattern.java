@@ -6,7 +6,7 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class FrequecyPattern {
+public class FrequencyPattern {
 	private String patternID;
 	private int weights;
 	private List<BehaviorInfo> behaviors = new ArrayList<>();
