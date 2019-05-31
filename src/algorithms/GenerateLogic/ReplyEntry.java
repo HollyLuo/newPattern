@@ -86,6 +86,7 @@ public class ReplyEntry {
         JSONObject output = new JSONObject();
         output.put("uniqueId", this.getUniqueId());
         output.put("id", this.getId());
+        output.put("action", this.getActionInfo().getAction());
         output.put("actioned_concept",this.getActionInfo().getActionedConcept());
         output.put("actioned_picture",this.getActionInfo().getActionedPicture());
         output.put("actioned_value", this.getActionInfo().getActionedValue());

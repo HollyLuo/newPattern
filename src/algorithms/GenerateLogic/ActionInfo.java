@@ -13,6 +13,13 @@ public class ActionInfo {
 		this.actionedPicture = "element.coveredRegion";
 		this.actionedValue = "value";
 	}
+	
+	public ActionInfo(String actionedConcept, String actionedValue) {
+        this.action = "actionType.type";
+        this.actionedConcept = actionedConcept;
+        this.actionedPicture = "element.coveredRegion";
+        this.actionedValue = actionedValue;
+    }
 
 	public String getAction() {
 		return action;

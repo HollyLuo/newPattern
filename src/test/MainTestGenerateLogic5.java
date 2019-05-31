@@ -1,5 +1,7 @@
 package test;
 
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -90,8 +92,9 @@ public class MainTestGenerateLogic5 {
         System.out.println("--------------生成uniqueId;-----------------");
 //      List<ReplyBehavior> replyBehaviorsList = new LinkedList<>();
         Map<ReplyBehavior, Integer> replyBehaviorsUniqueIdsMap = new LinkedHashMap<>(); 
+        Map<Integer, ReplyActionInfo> replyActionInfoMap = new LinkedHashMap<>(); 
         Boolean existBehaviorLogic = false;
-        GenerateReplyUniqueIDs(0, frequencyPatternBehaviorsList, frequencyPatternsMap, replyBehaviorsUniqueIdsMap, existBehaviorLogic);
+        GenerateReplyUniqueIDs(0, frequencyPatternBehaviorsList, frequencyPatternsMap, replyBehaviorsUniqueIdsMap, replyActionInfoMap, existBehaviorLogic);
         for(Map.Entry<ReplyBehavior, Integer> entry: replyBehaviorsUniqueIdsMap.entrySet()){
       	  System.out.println("key: " + entry.getKey().toString() + "; " + "value: " + entry.getValue());   	
         }
@@ -99,16 +102,27 @@ public class MainTestGenerateLogic5 {
         System.out.println("--------------Logic Judgement -----------------");
 //        Map<String, Logic> logicMaps = new HashMap<>(); 
         Boolean existBehaviorLogic2 = false;
-        judgeLogic(0, frequencyPatternBehaviorsList, frequencyPatternsMap, replyBehaviorsUniqueIdsMap, existBehaviorLogic2);
+        judgeLogic(0, frequencyPatternBehaviorsList, frequencyPatternsMap, replyBehaviorsUniqueIdsMap, existBehaviorLogic2, replyActionInfoMap);
         
         System.out.println("--------------Reply  Entries-----------------");
+        File file =new File("replyEntry.txt");
+
+        //if file doesnt exists, then create it
+        if(!file.exists()){
+         file.createNewFile();
+        }
+        BufferedWriter result = new BufferedWriter(new FileWriter(file));  
         for(ReplyEntry replyEntry : replyEntriesList){
-        	System.out.println(replyEntry.toJsonObject());   	
-        }      
+        	System.out.println(replyEntry.toJsonObject());   
+        	result.write(replyEntry.toJsonObject().toString());
+        	
+        }  
+        result.flush();
+        result.close();
 	}
 
-	private static Map<ReplyBehavior, Integer>  GenerateReplyUniqueIDs(int firstIndex, List<PatternBehaviors> frequencyPatternsList,
-			Map<String, FrequencyPattern> frequencyPatternsMap, Map<ReplyBehavior, Integer> replyBehaviorsUniqueIdsMap, Boolean existBehaviorLogic) {
+	private static void GenerateReplyUniqueIDs(int firstIndex, List<PatternBehaviors> frequencyPatternsList,
+			Map<String, FrequencyPattern> frequencyPatternsMap, Map<ReplyBehavior, Integer> replyBehaviorsUniqueIdsMap, Map<Integer, ReplyActionInfo> replyActionInfoMap, Boolean existBehaviorLogic) throws Exception {
 //		List<ReplyBehavior> replyBehaviorsList = new LinkedList<>();
 		int length = 0;
 		List<String> patternIdsList = new ArrayList<>();
@@ -130,7 +144,7 @@ public class MainTestGenerateLogic5 {
 			
 			if(hasCurrentBehaviorLogic){				
 				for(Map.Entry<String, List<PatternBehaviors>> entry: currentPatternsMap.entrySet()){
-					GenerateReplyUniqueIDs(i, entry.getValue(), frequencyPatternsMap, replyBehaviorsUniqueIdsMap,existBehaviorLogic);
+					GenerateReplyUniqueIDs(i, entry.getValue(), frequencyPatternsMap, replyBehaviorsUniqueIdsMap,replyActionInfoMap,existBehaviorLogic);
 				}
 				existBehaviorLogic = true;
 			}else {
@@ -150,18 +164,26 @@ public class MainTestGenerateLogic5 {
 				replyActionInfo.setUniqueId(uniqueId);
 				replyActionInfo.setBehaviorId(Integer.parseInt(replyBehavior.getBehaviorIds()));
 //				replyActionInfo.setActionInfo(actionInfo);
-				
+//				currentUniqueIds
+				List<Map<String, Object>> behaviorsAllInfoList = new ArrayList<>();
+		        behaviorsAllInfoList = getBehaviorsAllInfoFromMongoDB("localhost", "IRA_multiVideo", "behaviors", currentUniqueIds);
+		        String title =  (String) behaviorsAllInfoList.get(0).get("title");
+		        String value =  (String) behaviorsAllInfoList.get(0).get("value");
+//		        action =  behaviorsAllInfoList.get(0).get("actionType");
+//		        actioned_picture = behaviorsAllInfoList.get(0).get("element");
+		        ActionInfo actionInfo = new ActionInfo(title, value);
+		        replyActionInfo.setActionInfo(actionInfo);
+		        replyActionInfoMap.put(uniqueId, replyActionInfo);
 				uniqueId++;
 			}
 
 		  }
 	   }
-	   return replyBehaviorsUniqueIdsMap;
 		
 	}
 
 	private static void judgeLogic(int firstIndex, List<PatternBehaviors> frequencyPatternsList,
-		Map<String, FrequencyPattern> frequencyPatternsMap, Map<ReplyBehavior, Integer> replyBehaviorsUniqueIdsMap, Boolean existBehaviorLogic) throws Exception {
+		Map<String, FrequencyPattern> frequencyPatternsMap, Map<ReplyBehavior, Integer> replyBehaviorsUniqueIdsMap, Boolean existBehaviorLogic, Map<Integer, ReplyActionInfo> replyActionInfoMap) throws Exception {
     	int length = 0;
 		List<String> patternIdsList = new ArrayList<>();
 		for (PatternBehaviors item : frequencyPatternsList) {
@@ -234,7 +256,7 @@ public class MainTestGenerateLogic5 {
 			   
 			    String behaviorLogicItem = behaviorLogic.getID();
                 String valueLogicItem = valueLogic.getID();
-			    ReplyEntry replyEntry = generateReplyEntry(currentPatternsMap, behaviorLogicItem, valueLogicItem, replyBehaviorsUniqueIdsMap, frequencyPatternsList, frequencyPatternsMap, nextbehaviorIdsList, i);
+			    ReplyEntry replyEntry = generateReplyEntry(currentPatternsMap, behaviorLogicItem, valueLogicItem, replyBehaviorsUniqueIdsMap, frequencyPatternsList, frequencyPatternsMap, nextbehaviorIdsList, i, replyActionInfoMap);
 
                 replyEntriesList.add(replyEntry);
 
@@ -242,7 +264,7 @@ public class MainTestGenerateLogic5 {
 			       
 				    for(Map.Entry<String, List<PatternBehaviors>> entry: nextPatternsMap.entrySet()){
 				   System.out.println("entry.getValue(): " + entry.getValue());
-				   judgeLogic(i+1, entry.getValue(), frequencyPatternsMap, replyBehaviorsUniqueIdsMap, existBehaviorLogic);
+				   judgeLogic(i+1, entry.getValue(), frequencyPatternsMap, replyBehaviorsUniqueIdsMap, existBehaviorLogic, replyActionInfoMap);
 					    
 					}
 				    existBehaviorLogic = true;
@@ -252,7 +274,7 @@ public class MainTestGenerateLogic5 {
 	}
 
     private static ReplyEntry generateReplyEntry(Map<String, List<PatternBehaviors>> currentPatternsMap,
-            String behaviorLogicItem, String valueLogicItem, Map<ReplyBehavior, Integer> replyBehaviorsUniqueIdsMap, List<PatternBehaviors> frequencyPatternsList, Map<String, FrequencyPattern> frequencyPatternsMap, Set<Integer> nextbehaviorIdsList, int i) {
+            String behaviorLogicItem, String valueLogicItem, Map<ReplyBehavior, Integer> replyBehaviorsUniqueIdsMap, List<PatternBehaviors> frequencyPatternsList, Map<String, FrequencyPattern> frequencyPatternsMap, Set<Integer> nextbehaviorIdsList, int i, Map<Integer, ReplyActionInfo> replyActionInfoMap) {
         List<String> currentPatternIdsList = new LinkedList<>();
         for(Map.Entry<String, List<PatternBehaviors>> entry: currentPatternsMap.entrySet()){
             for(PatternBehaviors pattern: entry.getValue()){
@@ -269,10 +291,12 @@ public class MainTestGenerateLogic5 {
         System.out.println("XXXX: " + replyBehavior.toString());
         int uniqueId = replyBehaviorsUniqueIdsMap.get(replyBehavior);
         System.out.println("uniqueId: " + uniqueId);
+        ActionInfo actionInfo = replyActionInfoMap.get(uniqueId).getActionInfo();
+        if(valueLogicItem!=null || valueLogicItem!=""){
+            actionInfo.setActionedValue("");
+        }
 
-        replyEntry = new ReplyEntry(uniqueId, behaviorId, 
-                    frequencyPatternsMap.get(frequencyPatternsList.get(0).getPatternId()).getBehaviors().get(i).getActionInfo(), 
-                    behaviorLogicItem, valueLogicItem, nextbehaviorIdsList);
+        replyEntry = new ReplyEntry(uniqueId, behaviorId, actionInfo, behaviorLogicItem, valueLogicItem, nextbehaviorIdsList);
         
         System.out.println(replyEntry.toString());
         return replyEntry;
@@ -282,7 +306,7 @@ public class MainTestGenerateLogic5 {
 			Map<String, List<PatternBehaviors>> currentPatternsMap, List<String> currentUniqueIds, Map<String, Integer> behaviorToReplyUniqueIdMap) throws Exception {
     	System.out.println("[hasValueLogic = true] : " + "index: " + i + ", behaviors: " + currentPatternsMap.keySet()
 		+ ", uniqueIds: " + currentUniqueIds.toString());
-		String valueLogicId = "ValueLogic" + "_" + patternIdsList.toString() + "_" + i + "_" + currentPatternsMap.keySet();
+		String valueLogicId = "ValueLogic" + "_" + patternIdsList.toString() + "_" + i + "_" + currentPatternsMap.keySet() + ".model";
 //		System.out.println("logicId: " + valueLogicId);
 		Logic valueLogic = new Logic();
 		valueLogic.setID(valueLogicId);
@@ -300,7 +324,7 @@ public class MainTestGenerateLogic5 {
 
 	private static Logic dealWithBehaviorLogic(List<String> patternIdsList, int i,
 			Map<String, List<PatternBehaviors>> nextPatternsMap, List<String> uniqueIds, Map<String, Integer> behaviorToReplyUniqueIdMap) throws Exception {
-    	String behaviorLogicId = "BehaviorLogic" + "_" + patternIdsList.toString() + "_" + i + "_" + nextPatternsMap.keySet().toString();
+    	String behaviorLogicId = "BehaviorLogic" + "_" + patternIdsList.toString() + "_" + i + "_" + nextPatternsMap.keySet().toString() + ".model";
 		Logic behaviorLogic = new Logic();
 		behaviorLogic.setID(behaviorLogicId);
 		behaviorLogic.setLogicType("BehaviorLogic");
