@@ -1,0 +1,16 @@
+@relation 'hasBehaviorLogic[6, 13, 20, 27, 42, 49]'
+
+@attribute 'Main Info.XMC Engage ID' String
+@attribute 'Main Info.Status' {Assigned}
+@attribute 'Main Info.Sub Status' {Pending}
+@attribute 'Required Fields.Subject' {Complete,Close}
+@attribute 'Required Fields.# of Securities' numeric
+@attribute 'Required Fields.Systems Requiring Setup' {SMC}
+@attribute 'Actions.Action Type' {Complete,Close}
+@attribute 'Complete Ticket.# of Processed Securities' {null}
+@attribute 'Close Ticket.CloseType' {null}
+@attribute replyUniqueId {uniqueId_5,uniqueId_7}
+
+@data
+XE181231S0387234,Assigned,Pending,Close,1,SMC,Close,null,null,?
+XE181231S0387295,Assigned,Pending,Close,2,SMC,Close,null,null,?
